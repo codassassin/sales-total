@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:flowable="http://flowable.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:design="http://flowable.org/design" typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://flowable.org/test"
+             design:palette="flowable-process-palette"
+             xsi:schemaLocation="http://flowable.org/design ">
+  <process id="salesModel" name="sales model" isExecutable="true">
+    <startEvent id="start"/>
+    <sequenceFlow sourceRef="start" targetRef="formTask1"/>
+    <userTask id="formTask1" name="upload file" />
+    <sequenceFlow sourceRef="formTask1" targetRef="serviceTask1"/>
+    <serviceTask id="serviceTask1" name="validate file" flowable:expression="validation.validateFile()" />
+    <endEvent id="endNoneEvent1" name="end" />
+  </process>
+</definitions>
