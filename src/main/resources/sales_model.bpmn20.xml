@@ -10,10 +10,13 @@
              xsi:schemaLocation="http://flowable.org/design ">
   <process id="salesModel" name="sales model" isExecutable="true">
     <startEvent id="start"/>
-    <sequenceFlow sourceRef="start" targetRef="formTask1"/>
-    <userTask id="formTask1" name="upload file" />
-    <sequenceFlow sourceRef="formTask1" targetRef="serviceTask1"/>
-    <serviceTask id="serviceTask1" name="validate file" flowable:expression="validation.validateFile()" />
-    <endEvent id="endNoneEvent1" name="end" />
+    <sequenceFlow sourceRef="start" targetRef="confirmOrderPickup" />
+    <userTask id="confirmOrderPickup" name="Confirm Order pick up" />
+    <sequenceFlow sourceRef="confirmOrderPickup" targetRef="sendPickupConfirmation" />
+    <serviceTask id="sendPickupConfirmation" name="Send Pickup confirmation" flowable:class="com.codassassin.salestotal.service.OrderPickupNotificationService" />
+    <sequenceFlow sourceRef="sendPickupConfirmation" targetRef="confirmOrderDelivery" />
+    <userTask id="confirmOrderDelivery"  name="Confirm order delivery" />
+    <sequenceFlow sourceRef="confirmOrderDelivery" targetRef="deliveryComplete" />
+    <endEvent id="deliveryComplete" name="delivery complete event" />
   </process>
 </definitions>
